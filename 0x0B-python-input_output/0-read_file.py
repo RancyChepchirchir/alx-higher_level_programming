@@ -1,14 +1,10 @@
 #!/usr/bin/python3
-"""Module: 0-read_file
-This is a function that reads a text file (UTF8) and prints it to stdout
+"""This function reads from a file and prints
+the content to stdout
 """
+
+
 def read_file(filename=""):
-    """Reads a text file (UTF8) and prints it to stdout
-
-    Args:
-        - filename: this is the file to be read
-    """   
-
-    with open(filename) as f:
-        read_data = f.read()
-        print(read_data, end="")
+    """open fucntion opens the file in read mode"""
+    with open(filename, encoding='utf-8') as file:
+        print(file.read(), end="")
