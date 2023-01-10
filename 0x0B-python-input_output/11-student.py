@@ -17,3 +17,8 @@ class Student():
                     attrs}
         else:
             return self.__dict__.copy()
+
+    def reload_from_json(self, json):
+        """Method for loading attributes from json"""
+        for k, val in json.items():
+            self.__dict__[k] = val
