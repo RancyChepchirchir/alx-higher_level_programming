@@ -1,22 +1,50 @@
 #!/usr/bin/python3
 """
-Module text_indentation
-prints a text with 2 new lines
-Adds 2 new lines after a set of characters.
+    This module contains a function that prints portions of a text, and
+    delimits them with specified characters, separating the portions
+    with two lines.
+
+    Args:
+        text: This argument can have leading and trailing white spaces
+            and even spaces in between. It must be a string instance.
+    Raises:
+        TypeError: if `text` argument is not a string.
+
+    Example:
+        >>> text = "    Chemistry. An interesting study?  Ans:  Yes   "
+        >>> text_indentation(text)
+        Chemistry.
+        An interesting study?
+        Ans:
+        Yes>>>
 """
 
 
 def text_indentation(text):
-    """
-    Prints a text and add two newlines
-    after each of these characters {'.', '?', ':'}.
-    """
+    """Prints portions of text with delimiters separated by two lines"""
 
-    if type(text) is not str:
+    chars = ['.', '?', ':']
+    sep = ["\t", " ", "\r", "\n", "\r"]
+    new = ""
+
+    if (not isinstance(text, str)):
         raise TypeError("text must be a string")
 
-    for delim in ".:?":
-        text = (delim + "\n\n").join(
-            [line.strip(" ") for line in text.split(delim)])
+    # Remove leading and trailing whitespaces
+    _text = text.strip()
 
-    print("{}".format(text), end="")
+    # Remove whitespaces in between texts after specified separators
+    for idx, char in enumerate(_text):
+        if _text[idx] in sep and _text[idx - 1] in chars:
+            continue
+        elif _text[idx] in sep and _text[idx + 1] in sep:
+            continue
+        elif _text[idx] in sep and _text[idx - 1] in sep:
+            continue
+        new += _text[idx]
+
+    for char in new:
+        if char in chars:
+            print("{}\n".format(char))
+            continue
+        print(char, end='')
